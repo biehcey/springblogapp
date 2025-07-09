@@ -4,10 +4,10 @@ import com.example.springblogapi.dto.*;
 import com.example.springblogapi.entity.Comment;
 import com.example.springblogapi.entity.Post;
 import com.example.springblogapi.entity.User;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +37,7 @@ public class DTOMapperService {
 
     public Post mapToPostEntity(PostRequestDTO postRequestDTO, User user){
         Post post = modelMapper.map(postRequestDTO, Post.class);
+        post.setId(null);
         post.setUser(user);
         return post;
     }
