@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class DTOMapperService {
     private final ModelMapper modelMapper;
 
+
+
     public User mapToUserEntity(UserRequestDTO userRequestDTO){
         return modelMapper.map(userRequestDTO, User.class);
     }
@@ -24,6 +26,7 @@ public class DTOMapperService {
 
     public Comment mapToCommentEntity(CommentRequestDTO commentRequestDTO, Post post, User user){
         Comment comment = modelMapper.map(commentRequestDTO, Comment.class);
+        comment.setId(null);
         comment.setPost(post);
         comment.setUser(user);
         return comment;

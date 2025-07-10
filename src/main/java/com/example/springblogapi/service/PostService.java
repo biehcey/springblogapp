@@ -44,4 +44,8 @@ public class PostService {
         Page<Post> posts = postRepository.findByUser(user, PageRequest.of(page,size));
         return posts.getContent().stream().map(dtoMapperService::mapToPostResponseDTO).collect(Collectors.toList());
     }
+
+    public Post getPostEntityByID(Long id){
+        return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not by id"));
+    }
 }
