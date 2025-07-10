@@ -9,5 +9,5 @@ public class CommentResponseDTO {
     private Long id;
     private String content;
     private String username;
-    private LocalDateTime localDateTime;
+    private LocalDateTime createdAt;
 }
