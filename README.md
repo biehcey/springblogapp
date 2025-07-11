@@ -35,14 +35,21 @@ src/
 └── main/
     ├── java/
     │   └── com/example/springblogapi/
-    │       ├── controller/        // REST controllers
-    │       ├── dto/              // DTO classes (Request & Response)
-    │       ├── entity/           // JPA entity classes
-    │       ├── repository/       // JPA repository interfaces
-    │       ├── service/          // Business logic & mapping
+    │       ├── controller/       
+    │       │   └── REST API controllers
+    │       ├── dto/              
+    │       │   └── DTO classes (Request & Response)
+    │       ├── entity/           
+    │       │   └── JPA entity classes
+    │       ├── repository/       
+    │       │   └── JPA repository interfaces
+    │       ├── service/          
+    │       │   └── Business logic & mapping
     │       └── SpringBlogApiApplication.java
     └── resources/
-        └── application.yml       // Configuration file
+        └── application.yml       
+            └── Configuration file
+
 
 ---
 
