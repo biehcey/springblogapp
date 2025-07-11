@@ -31,7 +31,7 @@ This project allows users to register, create posts, and comment on posts.
 ---
 
 ## 📁 Project Structure
-
+'''
 src/
 └── main/
     ├── java/
@@ -43,7 +43,7 @@ src/
     │       ├── service/          → Business logic & mapping
     │       └── SpringBlogApiApplication.java
     └── resources/
-        └── application.yml       → Project configuration
+        └── application.yml       → Project configuration  '''
 ---
 
 ## 🔧 API Endpoints 
