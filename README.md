@@ -31,25 +31,11 @@ This project allows users to register, create posts, and comment on posts.
 ---
 
 ## 📁 Project Structure
-src/
-└── main/
-    ├── java/
-    │   └── com/example/springblogapi/
-    │       ├── controller/       
-    │       │   └── REST API controllers
-    │       ├── dto/              
-    │       │   └── DTO classes (Request & Response)
-    │       ├── entity/           
-    │       │   └── JPA entity classes
-    │       ├── repository/       
-    │       │   └── JPA repository interfaces
-    │       ├── service/          
-    │       │   └── Business logic & mapping
-    │       └── SpringBlogApiApplication.java
-    └── resources/
-        └── application.yml       
-            └── Configuration file
-
+- controller/ → REST API endpoints
+- dto/ → Request & Response data transfer classes
+- entity/ → JPA entity classes
+- repository/ → Data access interfaces (Spring Data JPA)
+- service/ → Business Logic ve DTO mapping
 
 ---
 
