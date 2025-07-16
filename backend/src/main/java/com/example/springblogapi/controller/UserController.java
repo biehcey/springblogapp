@@ -1,5 +1,6 @@
 package com.example.springblogapi.controller;
 
+import com.example.springblogapi.dto.LoginRequestDTO;
 import com.example.springblogapi.dto.UserRequestDTO;
 import com.example.springblogapi.dto.UserResponseDTO;
 import com.example.springblogapi.service.UserService;
@@ -23,5 +24,10 @@ public class UserController {
     @GetMapping("/{id}")
     public UserResponseDTO getUser(@PathVariable Long id){
         return userService.getUserById(id);
+    }
+
+    @PostMapping("/login")
+    public UserResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
+        return userService.login(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
     }
 }
