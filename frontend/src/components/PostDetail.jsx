@@ -20,31 +20,33 @@ function PostDetail() {
   }, [id]);
 
   if (!id || isNaN(Number(id))) {
-    return <div>Invalid post ID</div>;
+    return <div className="alert">Invalid post ID</div>;
   }
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return <div className="alert">Loading...</div>;
 
   return (
-    <div>
+    <div className="container">
       <h2>{post.title}</h2>
-      <p>By {post.username} on {new Date(post.createdAt).toLocaleString()}</p>
+      <p className="post-meta">By {post.username} on {new Date(post.createdAt).toLocaleString()}</p>
       <p>{post.content}</p>
 
       <h3>Comments</h3>
       {comments.length === 0 ? (
-        <p>No comments yet</p>
+        <p className="post-meta">No comments yet</p>
       ) : (
-        <ul>
+        <ul className="space-y">
           {comments.map(c => (
-            <li key={c.id}>
+            <li key={c.id} className="comment-item">
               <strong>{c.username}</strong>: {c.content} <em>({new Date(c.createdAt).toLocaleString()})</em>
             </li>
           ))}
         </ul>
       )}
 
-      <Link to={`/posts/${id}/comments`}>Add a Comment</Link>
+      <Link to={`/posts/${id}/comments`} className="post-title">
+        Add a Comment
+      </Link>
     </div>
   );
 }

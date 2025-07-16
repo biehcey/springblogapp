@@ -28,14 +28,15 @@ function PostList() {
   if (!posts || posts.length === 0) return <div>No posts found.</div>;
 
   return (
-    <div>
+    <div className="container">
       <h1>Posts</h1>
-      <ul>
+      <ul className="space-y">
         {posts.map(post => (
-          <li key={post.id}>
-            <Link to={`/posts/${post.id}`}>
-              {post.title} by {post.username}
+          <li key={post.id} className="post-card">
+            <Link to={`/posts/${post.id}`} className="post-title">
+              {post.title}
             </Link>
+            <p className="post-meta">by <span>{post.username}</span></p>
           </li>
         ))}
       </ul>

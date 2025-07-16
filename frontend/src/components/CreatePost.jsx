@@ -13,7 +13,7 @@ function CreatePost() {
 
   // userId yoksa uyarı göster ve formu kapat
   if (!userId) {
-    return <div>You must <a href="/login">log in</a> to create a post.</div>;
+    return <div className="alert">You must <a href="/login">log in</a> to create a post.</div>;
   }
 
   const handleSubmit = async (e) => {
@@ -30,24 +30,16 @@ function CreatePost() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Create New Post</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label><br />
-          <input
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            required
-          />
+          <label>Title:</label>
+          <input className="form-input" value={title} onChange={e => setTitle(e.target.value)} required />
         </div>
         <div>
-          <label>Content:</label><br />
-          <textarea
-            value={content}
-            onChange={e => setContent(e.target.value)}
-            required
-          />
+          <label>Content:</label>
+          <textarea className="form-input" value={content} onChange={e => setContent(e.target.value)} required />
         </div>
         <button type='submit'>Create Post</button>
       </form>

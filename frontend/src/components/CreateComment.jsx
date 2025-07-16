@@ -10,7 +10,7 @@ function CreateComment() {
   const userId = user?.id;
 
   if (!userId) {
-    return <div>You must <a href="/login">log in</a> to comment.</div>;
+    return <div className="alert">You must <a href="/login">log in</a> to comment.</div>;
   }
 
   const handleSubmit = async (e) => {
@@ -30,9 +30,10 @@ function CreateComment() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="container">
       <h2>Add Comment</h2>
       <textarea
+        className="form-input"
         value={content}
         onChange={e => setContent(e.target.value)}
         required
