@@ -46,6 +46,6 @@ public class PostService {
     }
 
     public Post getPostEntityByID(Long id){
-        return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not by id"));
+        return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found by id"));
     }
 }
