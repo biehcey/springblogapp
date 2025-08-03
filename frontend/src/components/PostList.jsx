@@ -3,7 +3,7 @@ import api from '../api';
 import { Link } from 'react-router-dom';
 
 function PostList() {
-  const [posts, setPosts] = useState(null); // Başlangıçta null yapalım
+  const [posts, setPosts] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
