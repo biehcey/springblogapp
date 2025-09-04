@@ -9,16 +9,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
-
+    Logger logger = Logger.getLogger(PostController.class.getName());
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PostResponseDTO createPost(@Valid @RequestBody PostRequestDTO postRequestDTO){
+        logger.info(postRequestDTO.toString());
         return postService.createPost(postRequestDTO);
     }
 

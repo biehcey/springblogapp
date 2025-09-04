@@ -21,11 +21,14 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
     private final DTOMapperService dtoMapperService;
+
     @Transactional
     public PostResponseDTO createPost(PostRequestDTO postRequestDTO){
+        System.out.println(">> createPost: " + postRequestDTO);
         User user = userService.getUserEntityById(postRequestDTO.getUserId());
         Post post = dtoMapperService.mapToPostEntity(postRequestDTO, user);
         Post savedPost = postRepository.save(post);
+        System.out.println(">> saved post id: " + savedPost.getId());
         return dtoMapperService.mapToPostResponseDTO(savedPost);
     }
 

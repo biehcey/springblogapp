@@ -32,11 +32,11 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public UserResponseDTO login(String username, String password) {
-        User user = userRepository.findByUsernameAndPassword(username, password);
-        if (user == null) {
-            throw new RuntimeException("Invalid username or password");
-        }
-        return dtoMapperService.mapToUserResponseDTO(user);
-    }
+//    public UserResponseDTO login(String username, String password) {
+//        User user = userRepository.findByUsernameAndPassword(username, password);
+//        if (user == null) {
+//            throw new RuntimeException("Invalid username or password");
+//        }
+//        return dtoMapperService.mapToUserResponseDTO(user);
+//    }
 }

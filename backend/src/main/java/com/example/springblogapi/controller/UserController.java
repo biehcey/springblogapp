@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
+//NOT USED
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -26,8 +26,8 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/login")
-    public UserResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
-        return userService.login(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
-    }
+//    @PostMapping("/login")
+//    public UserResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
+//        return userService.login(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
+//    }
 }

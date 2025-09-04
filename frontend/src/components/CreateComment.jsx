@@ -3,14 +3,20 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
 
 function CreateComment() {
-  const { id } = useParams();
+  const { id } = useParams(); // Post ID
   const [content, setContent] = useState('');
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
-  const userId = user?.id;
 
-  if (!userId) {
-    return <div className="alert">You must <a href="/login">log in</a> to comment.</div>;
+  // Kullanıcı bilgisi ve token
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('token');
+
+  if (!token || !user?.id) {
+    return (
+      <div>
+        You must <a href="/login">log in</a> to comment.
+      </div>
+    );
   }
 
   const handleSubmit = async (e) => {
@@ -22,25 +28,34 @@ function CreateComment() {
     }
 
     try {
-      await api.post('/comments', { content, userId, postId: Number(id) });
+      const response = await api.post('/comments', {
+        content,
+        userId: user.id,
+        postId: Number(id)
+      });
+
+      console.log('Comment created:', response.data);
+
       navigate(`/posts/${id}`);
     } catch (err) {
-      console.error(err);
+      console.error('Error submitting comment:', err);
+      alert("Error submitting comment");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="container">
+    <div>
       <h2>Add Comment</h2>
-      <textarea
-        className="form-input"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-        required
-        placeholder='Comment'
-      />
-      <button type="submit">Submit</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={content}
+          onChange={e => setContent(e.target.value)}
+          required
+          placeholder="Write your comment..."
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 }
 

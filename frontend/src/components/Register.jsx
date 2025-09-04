@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../api';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -12,16 +12,21 @@ function Register() {
     e.preventDefault();
 
     try {
-      await api.post('/users', {
-        username,
-        email,
-        password
-      });
-      alert('Registration successful! Redirecting to login page.');
-      navigate('/login');
-    } catch (err) {
-      console.error(err);
-      alert('An error occurred during registration.');
+      const response = await axios.post(
+        'http://localhost:8080/auth/register',
+        { username, email, password },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+
+      console.log('Register response:', response.data);
+
+      if (response.data) {
+        alert('Registration successful!');
+        navigate('/login'); // Başarılı ise login sayfasına yönlendir
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert('Registration failed.');
     }
   };
 
@@ -32,6 +37,7 @@ function Register() {
         <div>
           <label>Username</label><br />
           <input
+            type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required

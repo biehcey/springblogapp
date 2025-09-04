@@ -7,41 +7,61 @@ function CreatePost() {
   const [content, setContent] = useState('');
   const navigate = useNavigate();
 
-  // localStorage'dan user bilgisini al
+  // localStorage'dan user bilgisi al
   const user = JSON.parse(localStorage.getItem('user'));
-  const userId = user?.id;
+  const token = localStorage.getItem('token');
 
-  // userId yoksa uyarı göster ve formu kapat
-  if (!userId) {
-    return <div className="alert">You must <a href="/login">log in</a> to create a post.</div>;
+  // Kullanıcı login değilse uyarı göster
+  if (!token || !user) {
+    return (
+      <div>
+        You must <a href="/login">log in</a> to create a post.
+      </div>
+    );
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await api.post('/posts', { title, content, userId });
-      alert("Post created successfully!");
-      navigate('/posts');
+      const response = await api.post('/posts', { 
+        title, 
+        content, 
+        userId: user.id 
+      });
+
+      console.log('Post created:', response.data);
+
+      alert('Post created successfully!');
+      navigate('/posts'); // Başarılı ise post listesine yönlendir
     } catch (error) {
-      console.error(error);
+      console.error('Error creating post:', error);
       alert('Error creating post');
     }
   };
 
   return (
-    <div className="container">
+    <div>
       <h2>Create New Post</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
-          <input className="form-input" value={title} onChange={e => setTitle(e.target.value)} required />
+          <label>Title</label><br />
+          <input
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            required
+          />
         </div>
         <div>
-          <label>Content:</label>
-          <textarea className="form-input" value={content} onChange={e => setContent(e.target.value)} required />
+          <label>Content</label><br />
+          <textarea
+            value={content}
+            onChange={e => setContent(e.target.value)}
+            required
+          />
         </div>
-        <button type='submit'>Create Post</button>
+        <button type="submit">Create Post</button>
       </form>
     </div>
   );

@@ -1,29 +1,37 @@
 import React, { useState } from 'react';
-import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await api.post('/users/login', {
-        username,
-        password
-      });
+      const response = await api.post(
+        '/auth/login',
+        { email, password },
+        { headers: { 'Content-Type': 'application/json' } } // JSON olarak gönder
+      );
 
-      // Kullanıcı objesini localStorage'a kaydet
-      localStorage.setItem('user', JSON.stringify(response.data));
+      console.log('Login response:', response.data);
 
-      alert("Login successful!");
-      navigate("/posts");
-    } catch (err) {
-      console.error(err);
-      alert("An error occurred");
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify({
+          id: response.data.userId,
+          createdAt: response.data.createdAt
+        }));
+
+        alert('Login successful!');
+        navigate('/posts');
+      }
+    } catch (error) {
+      console.error('Login error:', error.response ? error.response.data : error.message);
+      alert('Login failed. Check your credentials.');
     }
   };
 
@@ -32,23 +40,24 @@ function Login() {
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          <label>Username</label><br />
+          <label>Email</label><br />
           <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div>
           <label>Password</label><br />
           <input
-            type='password'
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type='submit'>Login</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
