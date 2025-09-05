@@ -33,7 +33,7 @@ function CreatePost() {
       console.log('Post created:', response.data);
 
       alert('Post created successfully!');
-      navigate('/posts'); // Başarılı ise post listesine yönlendir
+      navigate('/posts'); 
     } catch (error) {
       console.error('Error creating post:', error);
       alert('Error creating post');

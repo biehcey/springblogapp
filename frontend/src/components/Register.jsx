@@ -22,7 +22,7 @@ function Register() {
 
       if (response.data) {
         alert('Registration successful!');
-        navigate('/login'); // Başarılı ise login sayfasına yönlendir
+        navigate('/login'); 
       }
     } catch (error) {
       console.error('Registration error:', error);
